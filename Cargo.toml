@@ -1,0 +1,36 @@
+[package]
+name = "osynic_serializer"
+version = "0.1.0"
+edition = "2024"
+authors = ["Hako Chest <zoneherobrine@gmail.com>"]
+rust-version = "1.85.0"
+description = "A osu beatmapsets serializer lib & TUI application based on osynic_osudb"
+keywords = ["osynic", "serializer", "tui", "osynic_osudb","diff"]
+categories = ["games","network-programming"]
+license = "MIT"
+documentation = "https://docs.rs/osynic_serializer"
+repository = "https://github.com/osynicite/osynic_serializer"
+
+[[bin]]
+name = "osynic-sl"
+path = "src/main.rs"
+
+[lib]
+name = "osynic_serializer"
+path = "src/lib.rs"
+
+[dependencies]
+
+whoami = "1.5.2"
+sys-info =  "0.9.1"
+chrono = "0.4.40"
+serde = { version = "1.0.218", features = ["derive"] }
+serde_json = "1.0.140"
+osynic_osudb = { path = "../osynic_osudb" }
+
+clap = {version="4.5.31", features = ["derive"],optional = true}
+[features]
+default = ["full"]
+full = ["tui","cli"]
+tui = ["clap"]
+cli = []
