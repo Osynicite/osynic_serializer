@@ -23,7 +23,11 @@
 
 [osynic_serializer](https://github.com/osynicite/osynic_serializer) is a high-performance osu! beatmap serialization tool developed based on [osynic_osudb](https://github.com/osynicite/osynic_osudb), supporting FOLDER and OSUDB serialization algorithms.
 
+![osynic_serializer.gif](https://s2.loli.net/2025/03/10/cwsgFnTEa76xiWQ.gif)
+
 It is recommended to use [osynic_downloader](https://github.com/osynicite/osynic_downloader) to achieve fast serialization of osu! beatmaps and multi-device beatmap synchronization.
+
+![osynic_downloader.gif](https://s2.loli.net/2025/03/10/hasqOmgctyG4TWd.gif)
 
 ## ✨ Features
 
@@ -120,7 +124,7 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 
 ## 🤝 Contribution Guidelines
 
-This library was written in almost an afternoon, so there are definitely many places that need to be improved. It just simply took out the serialization function in `osynic_core`, and many places are still very rigid
+This library was written in almost an afternoon, so there are definitely many places that need to be improved. It just simply took out the serialization function in `osynic_core`, and many places are still very rigid, but I am currently too lazy to optimize it.
 
 So, if there is any problem with the code, or if you have any suggestions, please feel free to submit a PR or Issue, and I will deal with it as soon as possible~
 

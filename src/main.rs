@@ -57,15 +57,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 beatmapset_ids: parse_song_id_list_with_mapper(&songs.songs),
             };
             let result_data = process_diff_sets(sets, args.diff)?;
+            println!("Total beatmapsets after diff: {}", result_data.beatmapset_ids.len());
             save_sets_data(is_diff,&args.output,  &result_data, args.algorithm)?;
         }
         JsonType::Songs => {
             let result_data = process_diff_songs(songs, args.diff)?;
+            println!("Total songs after diff: {}", result_data.songs.len());
             save_songs_data(is_diff,&args.output, &result_data, args.algorithm)?;
         }
     }
-    // let result_data = process_diff_songs(songs, args.diff)?;
-    // save_result_data(is_diff,&args.output, json_type, &result_data, args.algorithm)?;
 
     Ok(())
 }
@@ -166,155 +166,3 @@ fn save_songs_data(
     Ok(())
 }
 
-// fn save_result_data(
-//     is_diff: bool,
-//     output_dir: &Path,
-//     json_type: JsonType,
-//     data: &SongsWithMapper,
-//     algorithm: Algorithm,
-// ) -> Result<(), Box<dyn std::error::Error>> {
-
-//     let diff_mark = if is_diff { "diff_" } else { "" };
-
-//     let filename = format!(
-//         "{}{}_{}.json",diff_mark,
-//         json_type.to_possible_value().unwrap_or_default().get_name(),
-//         match algorithm {
-//             Algorithm::OSUDB => "dm",
-//             Algorithm::FOLDER => "m",
-//         }
-//     );
-
-//     let json = match json_type {
-//         JsonType::Sets => {
-//             let sets = Beatmapsets {
-//                 beatmapset_ids: parse_song_id_list_with_mapper(&data.songs),
-//             };
-//             serde_json::to_string_pretty(&sets)?
-//         }
-//         JsonType::Songs => serde_json::to_string_pretty(&data.songs)?,
-//     };
-
-//     marked_save_to(output_dir.to_str().unwrap_or_default(), &filename, &json)?;
-//     Ok(())
-// }
-
-
-// fn main()-> Result<(), Box<dyn std::error::Error>> {
-//     let args = CliArgs::parse();
-
-    
-//     let json_type= args.json_type;
-
-//     let diff = args.diff;
-
-//     match diff.clone() {
-//         Some(diff) => {
-//             let diff = diff.to_str().unwrap_or_default();
-//             let diff = std::fs::read_to_string(diff)?;
-//             if json_type == "songs" {
-//                 if !check_songs_type(&diff) {
-//                     eprintln!("Invalid diff file: {}", diff);
-//                     return Err("Invalid diff file".into());
-//                 }
-//             } else if json_type == "sets" {
-//                 if !check_sets_type(&diff) {
-//                     eprintln!("Invalid diff file: {}", diff);
-//                     return Err("Invalid diff file".into());
-//                 }
-//             } else {
-//                 eprintln!("Invalid json type: {}", json_type);
-//                 return Err("Invalid json type".into());
-//             }
-//         }
-//         None => {}
-//     }
-
-//     let mut osu_dir = args.path.unwrap_or_default().to_string_lossy().to_string();
-
-//     if osu_dir.is_empty() {
-//         if !check_osu_dir() {
-//             println!("osu! path not found, please specify the path to osu! installation");
-//             return Err("osu! path not found".into());
-//         } else {
-//             let default_osu_dir = get_osu_dir().to_string();
-//             osu_dir = default_osu_dir;
-//         }
-//     }
-
-//     let output_dir = args.output.to_str().unwrap_or_default();
-
-//     let filename: String;
-//     let songs: SongsWithMapper;
-
-//     match args.algorithm.as_str() {
-//         "OSUDB" => {
-//             songs = match serialize_by_osu_db(&osu_dir) {
-//                 Ok(songs) => songs,
-//                 Err(e) => {
-//                     eprintln!("Error: {}", e);
-//                     return Err("Error in serialize_by_osu_db".into());
-//                 }
-//             };
-//             // filename = "songs_dm.json".to_string();
-//             filename = format!("{}_dm.json", json_type);
-            
-//         }
-//         "FOLDER" => {
-//             songs = match serialize_by_folder(&osu_dir) {
-//                 Ok(songs) => songs,
-//                 Err(e) => {
-//                     eprintln!("Error: {}", e);
-//                     return Err("Error in serialize_by_folder".into());
-//                 }
-//             };
-//             // filename = "songs_m.json".to_string();
-//             filename = format!("{}_m.json", json_type);
-            
-//         }
-//         _ => {
-//             eprintln!("Invalid algorithm: {}", args.algorithm);
-//             return Err("Invalid algorithm".into());
-//         }
-//     }
-
-
-//     if diff.is_none() {
-//         if json_type == "sets" {
-//             let song_id_list = parse_song_id_list_with_mapper(&songs.songs);
-//             let beatmapsets = Beatmapsets {
-//                 beatmapset_ids: song_id_list,
-//             };
-//             let json = serde_json::to_string_pretty(&beatmapsets)?;
-//             marked_save_to(&output_dir, &filename, &json)?;
-//         } else if json_type == "songs" {
-//             let json = serde_json::to_string_pretty(&songs.songs)?;
-//             marked_save_to(&output_dir, &filename, &json)?;
-//         } else {
-//             eprintln!("Invalid json type: {}", json_type);
-//             return Err("Invalid json type".into());
-//         }
-//     } else {
-//         let diff = diff.unwrap_or_default();
-//         let diff = std::fs::read_to_string(diff)?;
-//         let diff: SongsWithMapper = serde_json::from_str(&diff)?;
-//         let diff_songs = diff_songs(&songs, &diff);
-//         if json_type == "sets" {
-//             let song_id_list = parse_song_id_list_with_mapper(&diff_songs.songs);
-//             let beatmapsets = Beatmapsets {
-//                 beatmapset_ids: song_id_list,
-//             };
-//             let json = serde_json::to_string_pretty(&beatmapsets)?;
-//             marked_save_to(&output_dir, &filename, &json)?;
-//         } else if json_type == "songs" {
-//             let json = serde_json::to_string_pretty(&diff_songs.songs)?;
-//             marked_save_to(&output_dir, &filename, &json)?;
-//         } else {
-//             eprintln!("Invalid json type: {}", json_type);
-//             return Err("Invalid json type".into());
-//         }
-//     }
-
-
-//     Ok(())
-// }

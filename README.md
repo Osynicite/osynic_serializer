@@ -23,7 +23,11 @@
 
 [osynic_serializer](https://github.com/osynicite/osynic_serializer) 是一款高效的osu!谱面序列化工具，基于[osynic_osudb](https://github.com/osynicite/osynic_osudb)开发，支持FOLDER、OSUDB两种序列化算法。
 
+![osynic_serializer.gif](https://s2.loli.net/2025/03/10/cwsgFnTEa76xiWQ.gif)
+
 推荐搭配[osynic_downloader](https://github.com/osynicite/osynic_downloader)使用，可实现osu!谱面的快速序列化与多设备谱面同步。
+
+![osynic_downloader.gif](https://s2.loli.net/2025/03/10/hasqOmgctyG4TWd.gif)
 
 ## ✨ 特性
 
@@ -53,10 +57,10 @@ cargo build --release
 ### 基本使用
 
 ```bash
-# 直接序列化Songs文件夹
+# 直接序列化Songs文件夹到songs.json
 osynic-sl -t songs -o ./songs
 
-# 直接序列化osu!.db文件
+# 直接序列化osu!.db文件到sets.json
 osynic-sl -t sets -p D:\\ProgramUnsigned\\Games\\OSU -o ./songs
 
 # Diff序列化Songs文件夹，输出diffSets.json相较于本地多出来的谱面
@@ -120,7 +124,7 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 
 ## 🤝 贡献指南
 
-这个库是差不多一个下午写完的，所以肯定还有很多地方需要改进，只是简单的把`osynic_core`里面的序列化功能拎出来了，很多地方还很生硬
+这个库是差不多一个下午写完的，所以肯定还有很多地方需要改进，只是简单的把`osynic_core`里面的序列化功能拎出来了，很多地方还很生硬，但我暂时也懒得改了
 
 所以，如果代码有任何问题，或者你有任何建议，欢迎提交PR或者Issue，我会尽快处理~
 
