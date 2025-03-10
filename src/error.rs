@@ -1,13 +1,13 @@
 pub type Result<T> = core::result::Result<T, Error>;
 
 pub struct Error {
-    inner: Box<ErrorKind>
+    inner: Box<ErrorKind>,
 }
 
 impl Error {
     pub fn new(kind: ErrorKind) -> Self {
         Self {
-            inner: Box::new(kind)
+            inner: Box::new(kind),
         }
     }
 }
@@ -76,7 +76,6 @@ pub enum ErrorKind {
     StdIoError(std::io::Error),
 }
 
-
 impl std::fmt::Debug for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -100,4 +99,3 @@ impl std::fmt::Display for ErrorKind {
         }
     }
 }
-

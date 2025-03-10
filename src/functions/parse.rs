@@ -1,5 +1,5 @@
+use crate::types::{Song, SongWithMapper};
 use osynic_osudb::entity::osu::beatmap::Beatmap;
-use crate::types::{Song,SongWithMapper};
 
 // 函数一：将beatmap类型里面的四个字段提取出来填充到song类型里面
 // 四个字段的一一对应是这样的：
@@ -31,7 +31,10 @@ pub fn parse_beatmap_to_song_with_mapper(beatmap: &Beatmap) -> SongWithMapper {
 // 函数二、Vec<Beatmap> -> Vec<Song>
 
 pub fn parse_beatmap_list_to_song_list(beatmaps: &Vec<Beatmap>) -> Vec<Song> {
-    beatmaps.iter().map(|beatmap| parse_beatmap_to_song(beatmap)).collect()
+    beatmaps
+        .iter()
+        .map(|beatmap| parse_beatmap_to_song(beatmap))
+        .collect()
 }
 
 // 函数三、返回Song的song_id
@@ -48,8 +51,6 @@ pub fn parse_song_id_list(songs: &Vec<Song>) -> Vec<u32> {
 pub fn parse_song_id_list_with_mapper(songs: &Vec<SongWithMapper>) -> Vec<u32> {
     songs.iter().map(|song| song.song_id).collect()
 }
-
-
 
 // test module
 
@@ -129,7 +130,7 @@ mod tests {
                 song_id: 1001653,
                 artist_name: "MIMI feat Hatsune Miku".to_string(),
                 song_name: "Mizuoto to Curtain".to_string(),
-                no_video: false
+                no_video: false,
             },
         ];
         let song_ids = parse_song_id_list(&songs);

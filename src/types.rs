@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug,Clone,Default)]
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct Song {
     pub song_id: u32,
     pub artist_name: String,
@@ -8,7 +8,7 @@ pub struct Song {
     pub no_video: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug,Clone,Default)]
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct SongWithMapper {
     pub song_id: u32,
     pub artist_name: String,

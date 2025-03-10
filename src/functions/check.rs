@@ -1,5 +1,4 @@
-pub fn check_osu_db(osu_dir:&str) -> bool {
-
+pub fn check_osu_db(osu_dir: &str) -> bool {
     let path = format!("{}/osu!.db", osu_dir);
     let path = std::path::Path::new(&path);
 
@@ -7,8 +6,7 @@ pub fn check_osu_db(osu_dir:&str) -> bool {
 }
 
 // 函数： check_songs_dir，检测当前地址下面是否有Songs文件夹，返回存在状态
-pub fn check_songs_dir(osu_dir:&str) -> bool {
-
+pub fn check_songs_dir(osu_dir: &str) -> bool {
     let path = format!("{}/Songs", osu_dir);
     let path = std::path::Path::new(&path);
 

@@ -1,4 +1,4 @@
-pub mod functions;
 pub mod commands;
-pub mod types;
 pub mod error;
+pub mod functions;
+pub mod types;

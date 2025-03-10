@@ -1,10 +1,10 @@
+use super::parse::{parse_beatmap_to_song, parse_beatmap_to_song_with_mapper};
 use osynic_osudb::entity::osu::osudb::OsuDB;
-use super::parse::{parse_beatmap_to_song,parse_beatmap_to_song_with_mapper};
 // use super::mark::add_timestamp_and_os_and_hostname_to_filename;
-use super::walker::{walk_file_name_with_extension_first, walk_folder_name};
 use super::storage::marked_save_to;
-use crate::types::{Song,SongWithMapper};
+use super::walker::{walk_file_name_with_extension_first, walk_folder_name};
 use crate::error::Result;
+use crate::types::{Song, SongWithMapper};
 
 pub fn serialize_song_folder_raw(folder_name: &str) -> Result<(u32, String, String, bool)> {
     let parts: Vec<&str> = folder_name.splitn(2, ' ').collect();
@@ -36,21 +36,24 @@ pub fn serialize_song_folder_raw(folder_name: &str) -> Result<(u32, String, Stri
     Ok((song_id, artist_name, song_name, no_video))
 }
 
-
 pub fn serialize_song_folder(folder_name: &str) -> Result<Song> {
     let (song_id, artist_name, song_name, no_video) = serialize_song_folder_raw(folder_name)?;
-    Ok(Song{song_id, artist_name, song_name, no_video})
+    Ok(Song {
+        song_id,
+        artist_name,
+        song_name,
+        no_video,
+    })
 }
 
 pub fn serialize_mapper_raw(folder_name: &str) -> Result<String> {
     let parts: Vec<&str> = folder_name.rsplitn(2, '(').collect();
     let rest = parts[0];
-    let rparts: Vec<&str> = rest.split( ')').collect();
+    let rparts: Vec<&str> = rest.split(')').collect();
     let mapper_name = rparts[0].to_string();
     Ok(mapper_name)
 }
 
-    
 pub fn serialize_osu_db(osu_db: &mut OsuDB) -> Result<Vec<Song>> {
     let mut songs = Vec::new();
 
@@ -87,9 +90,11 @@ pub fn serialize_song_folder_with_mapper(songs_dir: &str) -> Result<Vec<SongWith
     let mut songs = Vec::new();
 
     for folder_name in walk_folder_name(songs_dir)? {
-        if let Ok((song_id, artist_name, song_name, no_video)) = serialize_song_folder_raw(&folder_name) {
+        if let Ok((song_id, artist_name, song_name, no_video)) =
+            serialize_song_folder_raw(&folder_name)
+        {
             let sub_name = format!("{}/{}", songs_dir, folder_name);
-            let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?; 
+            let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?;
             let mapper_name = serialize_mapper_raw(&inner_name)?;
             songs.push(SongWithMapper {
                 song_id,
@@ -109,7 +114,9 @@ pub fn serialize_by_folder_name(songs_dir: &str) -> Result<()> {
     let mut songs = Vec::new();
 
     for folder_name in walk_folder_name(songs_dir)? {
-        if let Ok((song_id, artist_name, song_name, no_video)) = serialize_song_folder_raw(&folder_name) {
+        if let Ok((song_id, artist_name, song_name, no_video)) =
+            serialize_song_folder_raw(&folder_name)
+        {
             songs.push(Song {
                 song_id,
                 artist_name,
@@ -131,13 +138,15 @@ pub fn serialize_by_folder_name(songs_dir: &str) -> Result<()> {
 
 // 函数二、 从文件夹中读取地图,包含mapper_name，并保存到当前文件夹下的/songs文件夹下，命名为songs_m_{}.json，其中{}为当前时间戳
 // 其中，mapper_name是从子文件夹中读取的一个.osu文件的文件名经过serialize_mapper_raw函数处理后的结果,注意！很多个.osu文件只取第一个
-pub fn serialize_by_folder_name_with_mapper(songs_dir: &str,save_path:&str) -> Result<()> {
+pub fn serialize_by_folder_name_with_mapper(songs_dir: &str, save_path: &str) -> Result<()> {
     let mut songs = Vec::new();
 
     for folder_name in walk_folder_name(songs_dir)? {
-        if let Ok((song_id, artist_name, song_name, no_video)) = serialize_song_folder_raw(&folder_name) {
+        if let Ok((song_id, artist_name, song_name, no_video)) =
+            serialize_song_folder_raw(&folder_name)
+        {
             let sub_name = format!("{}/{}", songs_dir, folder_name);
-            let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?; 
+            let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?;
             let mapper_name = serialize_mapper_raw(&inner_name)?;
             songs.push(SongWithMapper {
                 song_id,
@@ -170,7 +179,7 @@ pub fn serialize_by_osu_db(osu_db: &mut OsuDB) -> Result<()> {
 }
 
 // 函数四、从OsuDB中读取地图,包含mapper_name，并保存到当前文件夹下的/songs文件夹下，命名为songs_dm_{}.json，其中{}为当前时间戳
-pub fn serialize_by_osu_db_with_mapper(osu_db: &mut OsuDB,save_path:&str) -> Result<()> {
+pub fn serialize_by_osu_db_with_mapper(osu_db: &mut OsuDB, save_path: &str) -> Result<()> {
     let songs = serialize_osu_db_with_mapper(osu_db)?;
     let json = serde_json::to_string_pretty(&songs)?;
     // let file_name = add_timestamp_and_os_and_hostname_to_filename("songs_dm.json");
@@ -184,7 +193,6 @@ pub fn open_osu_db(osu_db: &str) -> Result<OsuDB> {
     Ok(OsuDB::from_file(osu_db)?)
 }
 
-
 // 函数五
 // pub fn serialize_by_folder_name_with_mapper(songs_dir: &str) -> Result<Vec<SongWithMapper>> {
 //     let mut songs = Vec::new();
@@ -192,7 +200,7 @@ pub fn open_osu_db(osu_db: &str) -> Result<OsuDB> {
 //     for folder_name in walk_folder_name(songs_dir)? {
 //         if let Ok((song_id, artist_name, song_name, no_video)) = serialize_song_folder_raw(&folder_name) {
 //             let sub_name = format!("{}/{}", songs_dir, folder_name);
-//             let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?; 
+//             let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?;
 //             let mapper_name = serialize_mapper_raw(&inner_name)?;
 //             songs.push(SongWithMapper {
 //                 song_id,
@@ -216,8 +224,6 @@ pub fn open_osu_db(osu_db: &str) -> Result<OsuDB> {
 //     // Ok(diff_songs)
 // }
 
-
-
 // test module
 
 #[cfg(test)]
@@ -227,7 +233,8 @@ mod tests {
 
     #[test]
     fn test_serialize_song_folder_raw() {
-        let folder_name = "1985060 hitorie - Nichijou to Chikyuu no Gakubuchi (wowaka x Hatsune Miku Edit)";
+        let folder_name =
+            "1985060 hitorie - Nichijou to Chikyuu no Gakubuchi (wowaka x Hatsune Miku Edit)";
         let result = serialize_song_folder_raw(folder_name).unwrap();
         println!("{:?}", result);
     }
@@ -239,7 +246,8 @@ mod tests {
 
     #[test]
     fn test_serialize_song_folder() {
-        let folder_name = "1985060 hitorie - Nichijou to Chikyuu no Gakubuchi (wowaka x Hatsune Miku Edit)";
+        let folder_name =
+            "1985060 hitorie - Nichijou to Chikyuu no Gakubuchi (wowaka x Hatsune Miku Edit)";
         let result = serialize_song_folder(folder_name).unwrap();
         println!("{:?}", result);
     }
@@ -260,7 +268,6 @@ mod tests {
     // successes:
     // core::algorithms::serialize::tests::test_serialize_mapper_raw
     // test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.00s
-
 
     #[test]
     fn test_serialize_osu_db() {

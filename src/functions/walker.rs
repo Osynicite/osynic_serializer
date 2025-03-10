@@ -1,5 +1,5 @@
-use std::path::{Path, PathBuf};
 use crate::error::Result;
+use std::path::{Path, PathBuf};
 
 // 函数一：进入文件夹，返回文件夹路径，如果不存在则新建后返回
 pub fn enter_folder(folder_path: &str) -> Result<PathBuf> {

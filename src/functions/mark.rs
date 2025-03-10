@@ -27,9 +27,20 @@ pub fn add_timestamp_to_foldername(foldername: &str) -> String {
 // 函数三、给文件名尾缀添加当前操作系统和设备名
 pub fn add_os_and_hostname_to_filename(filename: &str) -> String {
     let os_info = if cfg!(target_os = "windows") {
-        format!("{}{}", sys_info::os_type().unwrap_or_default(), sys_info::os_release().unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::os_type().unwrap_or_default(),
+            sys_info::os_release().unwrap_or_default()
+        )
     } else {
-        format!("{}{}",sys_info::linux_os_release().unwrap_or_default().name(),sys_info::linux_os_release().unwrap_or_default().version_id.unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::linux_os_release().unwrap_or_default().name(),
+            sys_info::linux_os_release()
+                .unwrap_or_default()
+                .version_id
+                .unwrap_or_default()
+        )
     };
     let hostname = sys_info::hostname().unwrap_or_default();
     let extension = std::path::Path::new(filename)
@@ -50,9 +61,20 @@ pub fn add_os_and_hostname_to_filename(filename: &str) -> String {
 // 函数四、给文件夹名尾缀添加当前操作系统和设备名
 pub fn add_os_and_hostname_to_foldername(foldername: &str) -> String {
     let os_info = if cfg!(target_os = "windows") {
-        format!("{}{}", sys_info::os_type().unwrap_or_default(), sys_info::os_release().unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::os_type().unwrap_or_default(),
+            sys_info::os_release().unwrap_or_default()
+        )
     } else {
-        format!("{}{}",sys_info::linux_os_release().unwrap_or_default().name(),sys_info::linux_os_release().unwrap_or_default().version_id.unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::linux_os_release().unwrap_or_default().name(),
+            sys_info::linux_os_release()
+                .unwrap_or_default()
+                .version_id
+                .unwrap_or_default()
+        )
     };
     let hostname = sys_info::hostname().unwrap_or_default();
     format!("{}_{}_{}", foldername, os_info, hostname)
@@ -62,9 +84,20 @@ pub fn add_os_and_hostname_to_foldername(foldername: &str) -> String {
 pub fn add_timestamp_and_os_and_hostname_to_filename(filename: &str) -> String {
     let timestamp = chrono::Utc::now().format("%y%m%d%H%M%S");
     let os_info = if cfg!(target_os = "windows") {
-        format!("{}{}", sys_info::os_type().unwrap_or_default(), sys_info::os_release().unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::os_type().unwrap_or_default(),
+            sys_info::os_release().unwrap_or_default()
+        )
     } else {
-        format!("{}{}",sys_info::linux_os_release().unwrap_or_default().name(),sys_info::linux_os_release().unwrap_or_default().version_id.unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::linux_os_release().unwrap_or_default().name(),
+            sys_info::linux_os_release()
+                .unwrap_or_default()
+                .version_id
+                .unwrap_or_default()
+        )
     };
     let hostname = sys_info::hostname().unwrap_or_default();
     let extension = std::path::Path::new(filename)
@@ -87,9 +120,20 @@ pub fn add_timestamp_and_os_and_hostname_to_filename(filename: &str) -> String {
 pub fn add_timestamp_and_os_and_hostname_to_foldername(foldername: &str) -> String {
     let timestamp = chrono::Utc::now().format("%y%m%d%H%M%S");
     let os_info = if cfg!(target_os = "windows") {
-        format!("{}{}", sys_info::os_type().unwrap_or_default(), sys_info::os_release().unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::os_type().unwrap_or_default(),
+            sys_info::os_release().unwrap_or_default()
+        )
     } else {
-        format!("{}{}",sys_info::linux_os_release().unwrap_or_default().name(),sys_info::linux_os_release().unwrap_or_default().version_id.unwrap_or_default())
+        format!(
+            "{}{}",
+            sys_info::linux_os_release().unwrap_or_default().name(),
+            sys_info::linux_os_release()
+                .unwrap_or_default()
+                .version_id
+                .unwrap_or_default()
+        )
     };
     let hostname = sys_info::hostname().unwrap_or_default();
     format!("{}_{}_{}_{}", foldername, timestamp, os_info, hostname)

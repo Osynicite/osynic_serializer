@@ -1,10 +1,14 @@
 use clap::{Parser, ValueEnum};
-use osynic_serializer::types::{Beatmapsets, SongWithMapper, SongsWithMapper};
-use std::path::{Path,PathBuf};    
-use osynic_serializer::commands::{diff_sets, diff_songs, serialize_by_folder, serialize_by_osu_db};
-use osynic_serializer::functions::check::{check_osu_dir,get_osu_dir,check_songs_type,check_sets_type};
-use osynic_serializer::functions::storage::marked_save_to;
+use osynic_serializer::commands::{
+    diff_sets, diff_songs, serialize_by_folder, serialize_by_osu_db,
+};
+use osynic_serializer::functions::check::{
+    check_osu_dir, check_sets_type, check_songs_type, get_osu_dir,
+};
 use osynic_serializer::functions::parse::parse_song_id_list_with_mapper;
+use osynic_serializer::functions::storage::marked_save_to;
+use osynic_serializer::types::{Beatmapsets, SongWithMapper, SongsWithMapper};
+use std::path::{Path, PathBuf};
 
 #[derive(Debug, Clone, clap::ValueEnum)]
 enum Algorithm {
@@ -17,7 +21,6 @@ enum JsonType {
     Songs,
     Sets,
 }
-
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -40,7 +43,7 @@ struct CliArgs {
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = CliArgs::parse();
-    
+
     let osu_dir = get_osu_directory(args.path)?;
     validate_diff_file(&args.diff, &args.json_type)?;
 
@@ -57,13 +60,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 beatmapset_ids: parse_song_id_list_with_mapper(&songs.songs),
             };
             let result_data = process_diff_sets(sets, args.diff)?;
-            println!("Total beatmapsets after diff: {}", result_data.beatmapset_ids.len());
-            save_sets_data(is_diff,&args.output,  &result_data, args.algorithm)?;
+            println!(
+                "Total beatmapsets after diff: {}",
+                result_data.beatmapset_ids.len()
+            );
+            save_sets_data(is_diff, &args.output, &result_data, args.algorithm)?;
         }
         JsonType::Songs => {
             let result_data = process_diff_songs(songs, args.diff)?;
             println!("Total songs after diff: {}", result_data.songs.len());
-            save_songs_data(is_diff,&args.output, &result_data, args.algorithm)?;
+            save_songs_data(is_diff, &args.output, &result_data, args.algorithm)?;
         }
     }
 
@@ -72,22 +78,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn get_osu_directory(user_path: Option<PathBuf>) -> Result<PathBuf, Box<dyn std::error::Error>> {
     user_path
-        .or_else(|| {
-            check_osu_dir().then(|| {
-                PathBuf::from(get_osu_dir())
-            })
-        })
+        .or_else(|| check_osu_dir().then(|| PathBuf::from(get_osu_dir())))
         .ok_or("osu! path not found".into())
 }
 
-fn validate_diff_file(diff_path: &Option<PathBuf>, json_type: &JsonType) -> Result<(), Box<dyn std::error::Error>> {
+fn validate_diff_file(
+    diff_path: &Option<PathBuf>,
+    json_type: &JsonType,
+) -> Result<(), Box<dyn std::error::Error>> {
     if let Some(path) = diff_path {
         let content = std::fs::read_to_string(path)?;
         let is_valid = match json_type {
             JsonType::Songs => check_songs_type(&content),
             JsonType::Sets => check_sets_type(&content),
         };
-        
+
         if !is_valid {
             return Err("Invalid diff file".into());
         }
@@ -134,7 +139,10 @@ fn save_sets_data(
     let filename = format!(
         "{}{}_{}.json",
         diff_mark,
-        JsonType::Sets.to_possible_value().unwrap_or_default().get_name(),
+        JsonType::Sets
+            .to_possible_value()
+            .unwrap_or_default()
+            .get_name(),
         match algorithm {
             Algorithm::OSUDB => "dm",
             Algorithm::FOLDER => "m",
@@ -155,7 +163,10 @@ fn save_songs_data(
     let filename = format!(
         "{}{}_{}.json",
         diff_mark,
-        JsonType::Songs.to_possible_value().unwrap_or_default().get_name(),
+        JsonType::Songs
+            .to_possible_value()
+            .unwrap_or_default()
+            .get_name(),
         match algorithm {
             Algorithm::OSUDB => "dm",
             Algorithm::FOLDER => "m",
@@ -165,4 +176,3 @@ fn save_songs_data(
     marked_save_to(output_dir.to_str().unwrap_or_default(), &filename, &json)?;
     Ok(())
 }
-
