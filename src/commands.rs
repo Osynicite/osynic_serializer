@@ -10,8 +10,6 @@ pub fn serialize_by_folder(osu_dir: &str) -> Result<SongsWithMapper> {
     if check_songs_dir(osu_dir) {
         let song_dir = format!("{}\\Songs", osu_dir);
         let songs = serialize_song_folder_with_mapper(&song_dir)?;
-        // let json = serde_json::to_string_pretty(&songs)?;
-        // marked_save_to(save_path, "songs_m.json", &json)?;
         Ok(SongsWithMapper { songs })
     } else {
         eprintln!("No songs found in the directory: {}", osu_dir);
@@ -24,8 +22,6 @@ pub fn serialize_by_osu_db(osu_dir: &str) -> Result<SongsWithMapper> {
         let osudb_dir = format!("{}\\osu!.db", osu_dir);
         let mut osu_db = open_osu_db(&osudb_dir)?;
         let songs = serialize_osu_db_with_mapper(&mut osu_db)?;
-        // let json = serde_json::to_string_pretty(&songs)?;
-        // marked_save_to(save_path, "songs_dm.json", &json)?;
         Ok(SongsWithMapper { songs })
     } else {
         eprintln!("No osu!db found in the directory : {}", osu_dir);

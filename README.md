@@ -70,6 +70,22 @@ osynic-sl -t sets -d json/diffSets.json -o ./songs
 osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o ./songs
 ```
 
+## ⚙️ 参数详解
+
+| 参数        | 简写 | 默认值           | 说明                                                      |
+| ----------- | ---- | ---------------- | --------------------------------------------------------- |
+| --algorithm | -a   | OSUDB            | osu!谱面序列化算法                                        |
+| --json-type | -t   | songs            | json输出格式                                              |
+| --path      | -p   | osu!默认安装目录 | osu!安装目录（或者 包含 Songs文件夹 或 osu!.db 的文件夹） |
+| --diff      | -d   | -                | 差量过滤文件地址（ 文件的 json-type 需要保持一致）        |
+| --output    | -o   | songs            | json存储目录（自动创建）                                  |
+| --help      | -h   | -                | 显示帮助信息                                              |
+
+## 支持的序列化算法
+
+1. **FOLDER**：基于Songs文件夹序列化，从谱面文件夹名以及.osu文件中提取元数据，文件夹名不完整时可能存在不准确的情况
+2. **OSUDB**：基于osu!.db文件序列化，最准确的序列化方式
+
 ### 输出JSON示例
 
 **sets.json**（sets模式）:
@@ -101,22 +117,6 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 ]
 ```
 
-## ⚙️ 参数详解
-
-| 参数        | 简写 | 默认值           | 说明                                                      |
-| ----------- | ---- | ---------------- | --------------------------------------------------------- |
-| --algorithm | -a   | OSUDB            | osu!谱面序列化算法                                        |
-| --json-type | -t   | songs            | json输出格式                                              |
-| --path      | -p   | osu!默认安装目录 | osu!安装目录（或者 包含 Songs文件夹 或 osu!.db 的文件夹） |
-| --diff      | -d   | -                | 差量过滤文件地址（ 文件的 json-type 需要保持一致）        |
-| --output    | -o   | songs            | json存储目录（自动创建）                                  |
-| --help      | -h   | -                | 显示帮助信息                                              |
-
-## 支持的序列化算法
-
-1. **FOLDER**：基于Songs文件夹序列化，从谱面文件夹名以及.osu文件中提取元数据，文件夹名不完整时可能存在不准确的情况
-2. **OSUDB**：基于osu!.db文件序列化，最准确的序列化方式
-
 ## 📌 注意事项
 
 1. **osu!安装目录**：请确保osu!安装目录下存在Songs文件夹或osu!.db文件，如果osu!安装目录不在默认位置，请使用`--path`参数指定
@@ -124,7 +124,7 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 
 ## 🤝 贡献指南
 
-这个库是差不多一个下午写完的，所以肯定还有很多地方需要改进，只是简单的把`osynic_core`里面的序列化功能拎出来了，很多地方还很生硬，但我暂时也懒得改了
+这个库是差不多一个下午写完的，所以肯定还有很多地方需要改进，只是简单的把`osynic_core`里面的序列化功能拎出来了，很多地方还很生硬，但我暂时也懒得改了，更待良辰吉日改之
 
 所以，如果代码有任何问题，或者你有任何建议，欢迎提交PR或者Issue，我会尽快处理~
 

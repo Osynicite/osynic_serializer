@@ -8,12 +8,6 @@ pub fn diff_new_songs_by_song_id(songs_old: &Vec<Song>, songs_new: &Vec<Song>) -
     for song in songs_new {
         if !song_id_list_old.contains(&song.song_id) {
             diff_songs.push(song.clone());
-            // 这里用clone的原因是：song是引用类型，如果不clone，那么diff_songs里面的song就会是引用类型，而不是实际的值类型
-            // 在性能方面，clone的开销是比较大的，但是这里的song是一个结构体，clone的开销是可以接受的，因为结构体的clone是浅拷贝？
-            // 如果不用clone，比较好的思路有两个：
-            // 1. 使用Rc<RefCell<Song>>，这样就可以实现引用类型的clone
-            // 2. 使用Box<Song>，这样也可以实现引用类型的clone
-            // 但是,性能上来说，clone的开销甚至还是最小的，所以这里选择了clone？
         }
     }
     diff_songs

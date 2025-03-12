@@ -127,10 +127,6 @@ pub fn serialize_by_folder_name(songs_dir: &str) -> Result<()> {
     }
 
     let json = serde_json::to_string_pretty(&songs)?;
-    // let file_name = add_timestamp_and_os_and_hostname_to_filename("songs.json");
-    // let path = "songs";
-    // create_path_if_not_exists(&path)?;
-    // save_file_in_if_not_exists(path, &file_name, &json)?;
     marked_save_to("songs", "songs.json", &json)?;
 
     Ok(())
@@ -159,9 +155,6 @@ pub fn serialize_by_folder_name_with_mapper(songs_dir: &str, save_path: &str) ->
     }
 
     let json = serde_json::to_string_pretty(&songs)?;
-    // let file_name = add_timestamp_and_os_and_hostname_to_filename("songs_m.json");
-    // create_path_if_not_exists(&save_path)?;
-    // save_file_in_if_not_exists(save_path, &file_name, &json)?;
     marked_save_to(save_path, "songs_m.json", &json)?;
     Ok(())
 }
@@ -170,10 +163,6 @@ pub fn serialize_by_folder_name_with_mapper(songs_dir: &str, save_path: &str) ->
 pub fn serialize_by_osu_db(osu_db: &mut OsuDB) -> Result<()> {
     let songs = serialize_osu_db(osu_db)?;
     let json = serde_json::to_string_pretty(&songs)?;
-    // let file_name = add_timestamp_and_os_and_hostname_to_filename("songs_d.json");
-    // let path = "songs";
-    // create_path_if_not_exists(&path)?;
-    // save_file_in_if_not_exists(path, &file_name, &json)?;
     marked_save_to("songs", "songs_d.json", &json)?;
     Ok(())
 }
@@ -182,9 +171,6 @@ pub fn serialize_by_osu_db(osu_db: &mut OsuDB) -> Result<()> {
 pub fn serialize_by_osu_db_with_mapper(osu_db: &mut OsuDB, save_path: &str) -> Result<()> {
     let songs = serialize_osu_db_with_mapper(osu_db)?;
     let json = serde_json::to_string_pretty(&songs)?;
-    // let file_name = add_timestamp_and_os_and_hostname_to_filename("songs_dm.json");
-    // create_path_if_not_exists(&save_path)?;
-    // save_file_in_if_not_exists(save_path, &file_name, &json)?;
     marked_save_to(save_path, "songs_dm.json", &json)?;
     Ok(())
 }
@@ -192,38 +178,6 @@ pub fn serialize_by_osu_db_with_mapper(osu_db: &mut OsuDB, save_path: &str) -> R
 pub fn open_osu_db(osu_db: &str) -> Result<OsuDB> {
     Ok(OsuDB::from_file(osu_db)?)
 }
-
-// 函数五
-// pub fn serialize_by_folder_name_with_mapper(songs_dir: &str) -> Result<Vec<SongWithMapper>> {
-//     let mut songs = Vec::new();
-
-//     for folder_name in walk_folder_name(songs_dir)? {
-//         if let Ok((song_id, artist_name, song_name, no_video)) = serialize_song_folder_raw(&folder_name) {
-//             let sub_name = format!("{}/{}", songs_dir, folder_name);
-//             let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?;
-//             let mapper_name = serialize_mapper_raw(&inner_name)?;
-//             songs.push(SongWithMapper {
-//                 song_id,
-//                 artist_name,
-//                 song_name,
-//                 no_video,
-//                 mapper_name,
-//             });
-//         }
-//     }
-
-//     Ok(songs)
-//     // let diff_songs = diff_new_songs_by_song_id_with_mapper(&songs, &songs);
-
-//     // let json = serde_json::to_string_pretty(&songs)?;
-//     // marked_save_to(save_path, "diff_songs_m.json", &json)?;
-//     // let file_name = add_timestamp_and_os_and_hostname_to_filename("diff_songs_m.json");
-//     // create_path_if_not_exists(&save_path)?;
-//     // save_file_in_if_not_exists(save_path, &file_name, &json)?;
-//     // Ok(())
-//     // Ok(diff_songs)
-// }
-
 // test module
 
 #[cfg(test)]

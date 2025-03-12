@@ -70,6 +70,22 @@ osynic-sl -t sets -a FOLDER -d json/diffSets.json -o ./songs
 osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o ./songs
 ```
 
+## ⚙️ Parameter Details
+
+| Parameter   | Abbreviation | Default Value                       | Description                                                                           |
+| ----------- | ------------ | ----------------------------------- | ------------------------------------------------------------------------------------- |
+| --algorithm | -a           | OSUDB                               | osu! beatmap serialization algorithm                                                  |
+| --json-type | -t           | songs                               | JSON output format                                                                    |
+| --path      | -p           | osu! default installation directory | osu! installation directory ( or a folder containing the Songs folder or osu!.db)     |
+| --diff      | -d           | -                                   | Incremental filtering file address (the json-type of the file needs to be consistent) |
+| --output    | -o           | songs                               | JSON storage directory (automatically created)                                        |
+| --help      | -h           | -                                   | Display help information                                                              |
+
+## Supported Serialization Algorithms
+
+1. **FOLDER**: Based on the Songs folder serialization, extract metadata from the beatmap folder name and .osu file, which may be inaccurate when the folder name is incomplete
+2. **OSUDB**: Based on the osu!.db file serialization, the most accurate serialization method
+
 ### Output JSON example
 
 **sets.json** (sets mode):
@@ -101,22 +117,6 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 ]
 ```
 
-## ⚙️ Parameter Details
-
-| Parameter   | Abbreviation | Default Value | Description                                                                 |
-| ----------- | ------------ | ------------- | --------------------------------------------------------------------------- |
-| --algorithm | -a           | OSUDB         | osu! beatmap serialization algorithm                                         |
-| --json-type | -t           | songs         | JSON output format                                                          |
-| --path      | -p           | osu! default  | osu! installation directory (or a folder containing the Songs folder or osu!.db) |
-| --diff      | -d           | -             | Incremental filtering file address (the json-type of the file needs to be consistent) |
-| --output    | -o           | songs         | JSON storage directory (automatically created)                             |
-| --help      | -h           | -             | Display help information                                                     |
-
-## Supported Serialization Algorithms
-
-1. **FOLDER**: Based on the Songs folder serialization, extract metadata from the beatmap folder name and .osu file, which may be inaccurate when the folder name is incomplete
-2. **OSUDB**: Based on the osu!.db file serialization, the most accurate serialization method
-
 ## 📌Notes
 
 1. **osu! Installation Directory**: Please ensure that the Songs folder or osu!.db file exists in the osu! installation directory. If the osu! installation directory is not in the default location, please use the `--path` parameter to specify it
@@ -124,7 +124,7 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 
 ## 🤝 Contribution Guidelines
 
-This library was written in almost an afternoon, so there are definitely many places that need to be improved. It just simply took out the serialization function in `osynic_core`, and many places are still very rigid, but I am currently too lazy to optimize it.
+This library was written in almost an afternoon, so there are definitely many places that need to be improved. It just simply took out the serialization function in `osynic_core`, and many places are still very rigid, but I am currently too lazy to optimize it, and I will wait for a better day to do it
 
 So, if there is any problem with the code, or if you have any suggestions, please feel free to submit a PR or Issue, and I will deal with it as soon as possible~
 
