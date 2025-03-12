@@ -1,3 +1,5 @@
+#![cfg(feature = "tui")]
+
 use clap::{Parser, ValueEnum};
 use osynic_serializer::commands::{
     diff_sets, diff_songs, serialize_by_folder, serialize_by_osu_db,

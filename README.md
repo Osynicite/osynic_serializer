@@ -128,7 +128,7 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 
 ```toml
 [dependencies]
-osynic_serializer = "0.1.0"
+osynic_serializer = {version="0.1.0",default-features = false, features = ["cli"]}
 ```
 
 最上层的方法都已位于`osynic_serializer::commands`模块中，所需类型均位于`osynic_serializer::types`模块中，而`osynic_serializer::functions`模块则是略底层的函数。

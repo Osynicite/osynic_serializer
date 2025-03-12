@@ -128,7 +128,7 @@ First, add the dependency to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-osynic_serializer = "0.1.0"
+osynic_serializer = {version="0.1.0",default-features = false, features = ["cli"]}
 ```
 
 The top-level methods are all located in the `osynic_serializer::commands` module, the required types are all located in the `osynic_serializer::types` module, and the `osynic_serializer::functions` module is a slightly lower-level function.
