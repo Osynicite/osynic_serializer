@@ -122,6 +122,34 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 1. **osu! Installation Directory**: Please ensure that the Songs folder or osu!.db file exists in the osu! installation directory. If the osu! installation directory is not in the default location, please use the `--path` parameter to specify it
 2. **Incremental Filtering**: The incremental filtering function requires a pre-existing JSON file for comparison serialization results, only outputting beatmaps that are locally missing
 
+## 🆗 Use as a lib
+
+First, add the dependency to your `Cargo.toml`:
+
+```toml
+[dependencies]
+osynic_serializer = "0.1.0"
+```
+
+The top-level methods are all located in the `osynic_serializer::commands` module, the required types are all located in the `osynic_serializer::types` module, and the `osynic_serializer::functions` module is a slightly lower-level function.
+
+```rust
+// Pass in osu_dir, serialize the Songs folder, and get Vec<SongWithMapper>
+use osynic_serializer::commands::serialize_by_folder;
+// Pass in osu_dir, serialize the osu!.db file, and get Vec<SongWithMapper>
+use osynic_serializer::commands::serialize_by_osudb;
+// Compare new Beatmapsets with existing Beatmapsets, and get the differential Beatmapsets
+use osynic_serializer::commands::diff_sets;
+// Compare new SongsWithMapper with existing SongsWithMapper, and get the differential SongsWithMapper
+use osynic_serializer::commands::diff_songs;
+```
+
+In addition, [osynic_osudb](https://github.com/osynicite/osynic_osudb) has also been re-exported and can be referenced directly through this library:
+
+```rust
+use osynic_serializer::osynic_osudb::*;
+```
+
 ## 🤝 Contribution Guidelines
 
 This library was written in almost an afternoon, so there are definitely many places that need to be improved. It just simply took out the serialization function in `osynic_core`, and many places are still very rigid, but I am currently too lazy to optimize it, and I will wait for a better day to do it

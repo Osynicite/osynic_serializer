@@ -28,7 +28,7 @@ serde = { version = "1.0.218", features = ["derive"] }
 serde_json = "1.0.140"
 osynic_osudb = { path = "../osynic_osudb" }
 
-clap = {version="4.5.31", features = ["derive"],optional = true}
+clap = {version="4.5.32", features = ["derive"],optional = true}
 [features]
 default = ["full"]
 full = ["tui","cli"]

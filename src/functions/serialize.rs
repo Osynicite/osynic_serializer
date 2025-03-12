@@ -1,6 +1,5 @@
 use super::parse::{parse_beatmap_to_song, parse_beatmap_to_song_with_mapper};
 use osynic_osudb::entity::osu::osudb::OsuDB;
-// use super::mark::add_timestamp_and_os_and_hostname_to_filename;
 use super::storage::marked_save_to;
 use super::walker::{walk_file_name_with_extension_first, walk_folder_name};
 use crate::error::Result;

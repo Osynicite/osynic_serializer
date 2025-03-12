@@ -122,6 +122,34 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
 1. **osu!安装目录**：请确保osu!安装目录下存在Songs文件夹或osu!.db文件，如果osu!安装目录不在默认位置，请使用`--path`参数指定
 2. **差量过滤**：差量过滤功能需要提供一个已有的json文件，用于对比序列化结果，仅输出本地缺失的谱面
 
+## 🆗 作为库来使用
+
+首先在你的`Cargo.toml`中添加依赖：
+
+```toml
+[dependencies]
+osynic_serializer = "0.1.0"
+```
+
+最上层的方法都已位于`osynic_serializer::commands`模块中，所需类型均位于`osynic_serializer::types`模块中，而`osynic_serializer::functions`模块则是略底层的函数。
+
+```rust
+// 传入osu_dir,序列化Songs文件夹，得到Vec<SongWithMapper>
+use osynic_serializer::commands::serialize_by_folder;
+// 传入osu_dir,序列化osu!.db文件，得到Vec<SongWithMapper>
+use osynic_serializer::commands::serialize_by_osudb;
+// 对比新的Beatmapsets和已有的Beatmapsets，得到差量后的Beatmapsets
+use osynic_serializer::commands::diff_sets;
+// 对比新的SongsWithMapper和已有的SongsWithMapper，得到差量后的SongsWithMapper
+use osynic_serializer::commands::diff_songs;
+```
+
+此外， [osynic_osudb](https://github.com/osynicite/osynic_osudb) 也已经重导出，可以直接通过本库引用：
+
+```rust
+use osynic_serializer::osynic_osudb::*;
+```
+
 ## 🤝 贡献指南
 
 这个库是差不多一个下午写完的，所以肯定还有很多地方需要改进，只是简单的把`osynic_core`里面的序列化功能拎出来了，很多地方还很生硬，但我暂时也懒得改了，更待良辰吉日改之
