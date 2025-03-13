@@ -55,7 +55,7 @@ jobs:
       - name: Package release
         if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
         run: |
-          BIN_NAME=osynic-dl${{ matrix.ext }}
+          BIN_NAME=osynic-sl${{ matrix.ext }}
           RELEASE_DIR=release-${{ matrix.target }}
           mkdir $RELEASE_DIR
           cp target/${{ matrix.target }}/release/$BIN_NAME $RELEASE_DIR/
@@ -64,7 +64,7 @@ jobs:
       - name: Package release for Windows
         if: matrix.os == 'windows-latest'
         run: |
-          $env:BIN_NAME = "osynic-dl${{ matrix.ext }}"
+          $env:BIN_NAME = "osynic-sl${{ matrix.ext }}"
           $env:RELEASE_DIR = "release-${{ matrix.target }}"
           mkdir $env:RELEASE_DIR
           cp target/${{ matrix.target }}/release/$env:BIN_NAME $env:RELEASE_DIR/
