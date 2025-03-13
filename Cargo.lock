@@ -273,9 +273,9 @@ checksum = "945462a4b81e43c4e3ba96bd7b49d834c6f61198356aa858733bc4acf3cbe62e"
 
 [[package]]
 name = "osynic_osudb"
-version = "0.1.0"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b3b800b30c3969676de1ebc6a22f73779aff5d5d96fc5e0d6fefc559aaf003ad"
+checksum = "5c1003bd6ac47ee13e7392f4d5934cd9995e285d2f8a0d91000cae33d73dfec7"
 dependencies = [
  "chrono",
  "nom",
@@ -285,7 +285,7 @@ dependencies = [
 
 [[package]]
 name = "osynic_serializer"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "chrono",
  "clap",
