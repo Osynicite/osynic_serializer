@@ -223,6 +223,7 @@ mod tests {
     // test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.00s
 
     #[test]
+    #[ignore = "Requires osu!.db file to be present"]
     fn test_serialize_osu_db() {
         let mut osu_db = OsuDB::from_file("osu!.db").unwrap();
         let songs = serialize_osu_db(&mut osu_db).unwrap();
@@ -230,6 +231,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "Requires osu!.db file to be present"]
     fn test_serialize_osu_db_with_mapper() {
         let mut osu_db = OsuDB::from_file("osu!.db").unwrap();
         let songs = serialize_osu_db_with_mapper(&mut osu_db).unwrap();
