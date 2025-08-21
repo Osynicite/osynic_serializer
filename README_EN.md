@@ -1,102 +1,192 @@
-<!-- markdownlint-disable MD033 MD041 MD045 -->
-<p align="center" dir="auto">
-    <img style="height:240px;width:240px" src="https://s2.loli.net/2025/03/10/GSsjOcHqdtBkyu9.png" alt="Logo逃走啦~"/>
-</p>
+<!-- markdownlint-disable MD033 MD041 MD045 MD023 MD036 MD022 MD032 MD031 -->
+<div align="center">
+  <img style="height:200px;width:200px" src="https://s2.loli.net/2025/03/10/GSsjOcHqdtBkyu9.png" alt="OsynicSerializer Logo"/>
+  
+  # OsynicSerializer 🎵
+  
+  **High-Performance osu! Beatmap Serialization Tool**
+  
+  Professional beatmap data processing tool built with Rust and osynic_osudb
+  
+  [![Rust Version](https://img.shields.io/badge/Rust-1.85%2B-blue?style=flat-square&logo=rust)](https://www.rust-lang.org/)
+  [![Crates.io](https://img.shields.io/crates/v/osynic_serializer?style=flat-square&logo=rust)](https://crates.io/crates/osynic_serializer)
+  [![Documentation](https://img.shields.io/docsrs/osynic_serializer?style=flat-square&logo=docs.rs)](https://docs.rs/osynic_serializer)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+  [![Build Status](https://img.shields.io/github/actions/workflow/status/osynicite/osynic_serializer/ci.yml?branch=master&style=flat-square&logo=github)](https://github.com/osynicite/osynic_serializer/actions)
+  
+  [中文版本](README.md) • [English Version](README_EN.md)
+  
+</div>
 
-<p align="center">
-  <h1 align="center">OsynicSerializer 🎵</h1>
-  <p align="center">A high-performance osu! beatmap serialization tool developed based on osynic_osudb</p>
-</p>
+---
 
-<p align="center">
-  <a href="https://www.rust-lang.org/" target="_blank"><img src="https://img.shields.io/badge/Rust-1.85%2B-blue"/></a>
-  <a href="https://crates.io/crates/osynic_serializer" target="_blank"><img src="https://img.shields.io/crates/v/osynic_serializer"/></a>
-  <a href="https://docs.rs/osynic_serializer" target="_blank"><img src="https://img.shields.io/docsrs/osynic_serializer/0.1.1"/></a>
-  <a href="https://github.com/osynicite/osynic_serializer" target="_blank"><img src="https://img.shields.io/badge/License-MIT-green.svg"/></a>
+## 🎯 Overview
 
-</p>
+[osynic_serializer](https://github.com/osynicite/osynic_serializer) is a high-performance osu! beatmap serialization tool developed based on [osynic_osudb](https://github.com/osynicite/osynic_osudb). It supports both FOLDER and OSUDB serialization algorithms for fast extraction and processing of osu! beatmap data.
 
-<p align="center">
-  <hr />
+<div align="center">
+  <img src="https://s2.loli.net/2025/03/10/cwsgFnTEa76xiWQ.gif" alt="OsynicSerializer Demo" style="max-width: 100%; border-radius: 8px;" />
+</div>
 
-[中文版本](README.md) | [English Version](README_EN.md)
+### 🔗 Ecosystem
 
-[osynic_serializer](https://github.com/osynicite/osynic_serializer) is a high-performance osu! beatmap serialization tool developed based on [osynic_osudb](https://github.com/osynicite/osynic_osudb), supporting FOLDER and OSUDB serialization algorithms.
+Recommended for use with [osynic_downloader](https://github.com/osynicite/osynic_downloader) to achieve a complete beatmap management and synchronization solution.
 
-![osynic_serializer.gif](https://s2.loli.net/2025/03/10/cwsgFnTEa76xiWQ.gif)
+<div align="center">
+  <img src="https://s2.loli.net/2025/03/10/hasqOmgctyG4TWd.gif" alt="OsynicDownloader Demo" style="max-width: 100%; border-radius: 8px;" />
+</div>
 
-It is recommended to use [osynic_downloader](https://github.com/osynicite/osynic_downloader) to achieve fast serialization of osu! beatmaps and multi-device beatmap synchronization.
+## ✨ Core Features
 
-![osynic_downloader.gif](https://s2.loli.net/2025/03/10/hasqOmgctyG4TWd.gif)
+### 🚀 **High-Performance Processing**
+- ⚡ **Lightning-Fast Serialization**: Process 5000+ beatmaps in just 0.6 seconds
+- 🔄 **Dual-Mode Support**: Process Songs directory or osu!.db file directly
+- 📊 **Multiple Output Formats**: Support for both sets and songs JSON formats
 
-## ✨ Features
+### 🎯 **Smart Differential Processing**
+- 🔍 **Incremental Sync**: Compare local vs remote beatmaps, output only differences
+- 📈 **Detailed Statistics**: Comprehensive processing result statistics
+- 🛡️ **Data Validation**: Automatic validation of input file format correctness
 
-- **Dual-mode serialization**: Supports direct serialization of the Songs directory or the osu!.db file
-- **Multiple output formats**: Supports serialization to sets or songs in two JSON formats
-- **Efficient and fast**: Extremely fast, serialization of 5000+ beatmaps takes only 0.6s
-- **Incremental filtering**: Supports incremental filtering, comparing serialization results with existing JSON files, and outputting only locally missing beatmaps
+### 🛠️ **Developer-Friendly**
+- 📚 **Library & CLI**: Use as both command-line tool and Rust library
+- 🔧 **Flexible Configuration**: Rich command-line parameters and configuration options
+- 📖 **Complete Documentation**: Detailed API documentation and usage examples
 
-## 📦 Installation
+## 📦 Installation Guide
 
-### Precompiled version
+### Method 1: Precompiled Binary (Recommended)
+
+Install directly using Cargo:
 
 ```bash
 cargo install osynic_serializer
 ```
 
-### Source code compilation
+### Method 2: Build from Source
 
 ```bash
+# Clone the repository
 git clone https://github.com/osynicite/osynic_serializer
 cd osynic_serializer
+
+# Build release version
 cargo build --release
+
+# Optional: Install locally
+cargo install --path .
 ```
+
+### System Requirements
+
+- **Rust**: 1.85.0 or higher
+- **Operating System**: Windows / macOS / Linux
+- **Memory**: 2GB+ available RAM recommended (for processing large collections)
 
 ## 🚀 Quick Start
 
-### Basic usage
+### Basic Usage
 
+#### 1. Songs Folder Serialization
 ```bash
-# Directly serialize the Songs folder to sets.json
-osynic-sl -t sets -a FOLDER -o ./songs
+# Serialize to songs.json format
+osynic-sl -t songs -a FOLDER -o ./output
 
-# Directly serialize the osu!.db file to songs.json
-osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -o ./songs
-
-# Diff serialize the Songs folder, output diffSets.json compared to the locally missing beatmaps
-osynic-sl -t sets -a FOLDER -d json/diffSets.json -o ./songs
-
-# Diff serialize the osu!.db file, output diffSongs.json compared to the locally missing beatmaps
-osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o ./songs
+# Serialize to sets.json format  
+osynic-sl -t sets -a FOLDER -o ./output
 ```
 
-## ⚙️ Parameter Details
+#### 2. osu!.db File Serialization
+```bash
+# Use specified osu! installation path
+osynic-sl -t songs -p "D:\Games\osu!" -o ./output
 
-| Parameter   | Abbreviation | Default Value                       | Description                                                                           |
-| ----------- | ------------ | ----------------------------------- | ------------------------------------------------------------------------------------- |
-| --algorithm | -a           | OSUDB                               | osu! beatmap serialization algorithm                                                  |
-| --json-type | -t           | songs                               | JSON output format                                                                    |
-| --path      | -p           | osu! default installation directory | osu! installation directory ( or a folder containing the Songs folder or osu!.db)     |
-| --diff      | -d           | -                                   | Incremental filtering file address (the json-type of the file needs to be consistent) |
-| --output    | -o           | songs                               | JSON storage directory (automatically created)                                        |
-| --help      | -h           | -                                   | Display help information                                                              |
+# Use default osu! installation path (auto-detection)
+osynic-sl -t songs -o ./output
+```
 
-## Supported Serialization Algorithms
+#### 3. Differential Processing (Incremental Sync)
+```bash
+# Compare and output missing beatmap sets
+osynic-sl -t sets -d "./remote/diffSets.json" -o ./output
 
-1. **FOLDER**: Based on the Songs folder serialization, extract metadata from the beatmap folder name and .osu file, which may be inaccurate when the folder name is incomplete
-2. **OSUDB**: Based on the osu!.db file serialization, the most accurate serialization method
+# Compare and output missing individual beatmaps
+osynic-sl -t songs -d "./remote/diffSongs.json" -o ./output
+```
 
-### Output JSON example
+### Real-World Use Cases
 
-**sets.json** (sets mode):
+#### Scenario 1: Export All Beatmap Data
+```bash
+# Export complete beatmap data for backup
+osynic-sl -t songs -o ./backup
+```
+
+#### Scenario 2: Multi-Device Synchronization
+```bash
+# Device A: Export local beatmap list
+osynic-sl -t sets -o ./sync
+
+# Device B: Compare and download missing beatmaps
+osynic-sl -t sets -d "./sync/sets_dm.json" -o ./to_download
+```
+
+## ⚙️ Command Line Parameters
+
+| Parameter | Short | Default | Description |
+|-----------|-------|---------|-------------|
+| `--algorithm` | `-a` | `OSUDB` | Serialization algorithm selection |
+| `--json-type` | `-t` | `songs` | Output JSON format type |
+| `--path` | `-p` | *Auto-detect* | osu! installation directory path |
+| `--diff` | `-d` | - | Differential comparison file path |
+| `--output` | `-o` | `songs` | Output directory path |
+| `--help` | `-h` | - | Display help information |
+
+### Parameter Details
+
+#### 🔧 `--algorithm` / `-a`
+Choose the beatmap data extraction method:
+
+- **`OSUDB`** (Recommended): Read from osu!.db file, most accurate data
+- **`FOLDER`**: Scan from Songs folder, suitable when db file is unavailable
+
+#### 📄 `--json-type` / `-t`
+Specify the output JSON data format:
+
+- **`songs`**: Detailed format with complete beatmap information
+- **`sets`**: Compact format with only beatmapset IDs
+
+#### 📁 `--path` / `-p`
+Specify osu! installation directory, the program will automatically look for:
+- `Songs/` folder (FOLDER mode)
+- `osu!.db` file (OSUDB mode)
+
+If not specified, the program will attempt auto-detection of common installation locations.
+
+#### 🔄 `--diff` / `-d`
+Provide comparison file for incremental processing:
+- File format must match the `--json-type` parameter
+- Output will be beatmap data missing locally
+
+## 📊 Output Format Explanation
+
+### Sets Format (`-t sets`)
+
+Suitable for beatmapset management and batch downloading:
 
 ```json
 {
-    "beatmapset_ids": ["114514", "1919810", "1538879"]
+  "beatmapset_ids": [
+    "114514",
+    "1919810", 
+    "1538879"
+  ]
 }
 ```
 
-**songs.json** (songs mode) (Osynic):
+### Songs Format (`-t songs`)
+
+Contains detailed beatmap metadata:
 
 ```json
 [
@@ -107,61 +197,331 @@ osynic-sl -t songs -p D:\\ProgramUnsigned\\Games\\OSU -d json/diffSongs.json -o 
     "song_name": "日常と地球の額縁 (wowaka x 初音ミク Edit)",
     "no_video": false
   },
-    {
+  {
     "song_id": 1997071,
     "artist_name": "ナブナ",
-    "mapper_name": "Ryuusei Aika",
+    "mapper_name": "Ryuusei Aika", 
     "song_name": "始発とカフカ",
     "no_video": false
   }
 ]
 ```
 
-## 📌Notes
+## 🎯 Advanced Usage
 
-1. **osu! Installation Directory**: Please ensure that the Songs folder or osu!.db file exists in the osu! installation directory. If the osu! installation directory is not in the default location, please use the `--path` parameter to specify it
-2. **Incremental Filtering**: The incremental filtering function requires a pre-existing JSON file for comparison serialization results, only outputting beatmaps that are locally missing
+### Batch Script Example
 
-## 🆗 Use as a lib
+Create `sync.bat` for automated beatmap synchronization:
 
-First, add the dependency to your `Cargo.toml`:
+```batch
+@echo off
+echo Exporting local beatmap data...
+osynic-sl -t sets -o ./export
+
+echo Comparing with remote data...
+osynic-sl -t sets -d "./remote/sets.json" -o ./missing
+
+echo Sync complete! Check ./missing directory
+pause
+```
+
+### PowerShell Script Example
+
+```powershell
+# Auto-detect and process multiple osu! installations
+$osuPaths = @(
+    "C:\Users\$env:USERNAME\AppData\Local\osu!",
+    "D:\Games\osu!",
+    "E:\osu!"
+)
+
+foreach ($path in $osuPaths) {
+    if (Test-Path $path) {
+        Write-Host "Processing path: $path"
+        osynic-sl -t songs -p $path -o "./backup/$(Split-Path $path -Leaf)"
+    }
+}
+```
+
+## 📚 Using as a Library
+
+OsynicSerializer is not only a command-line tool but also a complete Rust library.
+
+### Adding Dependencies
+
+Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-osynic_serializer = {version="0.1.0",default-features = false, features = ["cli"]}
+osynic_serializer = { version = "0.1.2", default-features = false, features = ["cli"] }
 ```
 
-The top-level methods are all located in the `osynic_serializer::commands` module, the required types are all located in the `osynic_serializer::types` module, and the `osynic_serializer::functions` module is a slightly lower-level function.
+### Core API
+
+#### Main Command Functions
 
 ```rust
-// Pass in osu_dir, serialize the Songs folder, and get Vec<SongWithMapper>
-use osynic_serializer::commands::serialize_by_folder;
-// Pass in osu_dir, serialize the osu!.db file, and get Vec<SongWithMapper>
-use osynic_serializer::commands::serialize_by_osudb;
-// Compare new Beatmapsets with existing Beatmapsets, and get the differential Beatmapsets
-use osynic_serializer::commands::diff_sets;
-// Compare new SongsWithMapper with existing SongsWithMapper, and get the differential SongsWithMapper
-use osynic_serializer::commands::diff_songs;
+use osynic_serializer::commands::{
+    serialize_by_folder,    // Serialize based on Songs folder
+    serialize_by_osu_db,    // Serialize based on osu!.db file  
+    diff_sets,              // Beatmapset differential comparison
+    diff_songs,             // Beatmap differential comparison
+};
 ```
 
-In addition, [osynic_osudb](https://github.com/osynicite/osynic_osudb) has also been re-exported and can be referenced directly through this library:
+#### Type Definitions
 
 ```rust
+use osynic_serializer::types::{
+    SongWithMapper,         // Individual beatmap information
+    SongsWithMapper,        // Beatmap collection
+    Beatmapsets,           // Beatmapset ID collection
+};
+```
+
+### Usage Examples
+
+#### Basic Serialization
+
+```rust
+use osynic_serializer::commands::{serialize_by_folder, serialize_by_osu_db};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Method 1: Serialize from Songs folder
+    let songs_from_folder = serialize_by_folder("/path/to/osu/Songs")?;
+    println!("Found {} beatmaps", songs_from_folder.songs.len());
+    
+    // Method 2: Serialize from osu!.db
+    let songs_from_db = serialize_by_osu_db("/path/to/osu")?;
+    println!("Database contains {} beatmaps", songs_from_db.songs.len());
+    
+    Ok(())
+}
+```
+
+#### Differential Processing
+
+```rust
+use osynic_serializer::commands::{diff_songs, diff_sets};
+use osynic_serializer::types::{SongsWithMapper, Beatmapsets};
+
+fn sync_beatmaps() -> Result<(), Box<dyn std::error::Error>> {
+    // Get local beatmap data
+    let local_songs = serialize_by_osu_db("/path/to/osu")?;
+    
+    // Load remote beatmap data
+    let remote_data = std::fs::read_to_string("remote_songs.json")?;
+    let remote_songs: SongsWithMapper = serde_json::from_str(&remote_data)?;
+    
+    // Calculate difference
+    let missing_songs = diff_songs(&remote_songs, &local_songs);
+    println!("Need to download {} beatmaps", missing_songs.songs.len());
+    
+    Ok(())
+}
+```
+
+#### Advanced Usage: Custom Processing Workflow
+
+```rust
+use osynic_serializer::functions::{
+    check::{check_osu_dir, get_osu_dir},
+    parse::parse_song_id_list_with_mapper,
+    storage::marked_save_to,
+};
+
+fn custom_workflow() -> Result<(), Box<dyn std::error::Error>> {
+    // 1. Check osu! installation
+    if !check_osu_dir() {
+        eprintln!("osu! installation not found");
+        return Ok(());
+    }
+    
+    let osu_path = get_osu_dir();
+    println!("Detected osu! installation: {}", osu_path);
+    
+    // 2. Serialize data
+    let songs = serialize_by_osu_db(&osu_path)?;
+    
+    // 3. Extract beatmapset IDs
+    let beatmapset_ids = parse_song_id_list_with_mapper(&songs.songs);
+    
+    // 4. Save results
+    let json_data = serde_json::to_string_pretty(&beatmapset_ids)?;
+    marked_save_to("./output", "beatmapsets.json", &json_data)?;
+    
+    Ok(())
+}
+```
+
+### Re-exported Dependencies
+
+You can directly use the underlying osu!.db parsing library:
+
+```rust
+// Directly use osynic_osudb functionality
 use osynic_serializer::osynic_osudb::*;
 ```
 
-## 🤝 Contribution Guidelines
+## ❓ Frequently Asked Questions
 
-This library was written in almost an afternoon, so there are definitely many places that need to be improved. It just simply took out the serialization function in `osynic_core`, and many places are still very rigid, but I am currently too lazy to optimize it, and I will wait for a better day to do it
+### 🔧 Installation & Configuration
 
-So, if there is any problem with the code, or if you have any suggestions, please feel free to submit a PR or Issue, and I will deal with it as soon as possible~
+<details>
+<summary><strong>Q: What to do when installation shows Rust version too low?</strong></summary>
 
-If you want to contribute code, please follow these rules:
+```bash
+# Update Rust to the latest version
+rustup update stable
 
-- Follow the official Rust coding specifications
-- New features must be accompanied by test cases
-- Run `cargo fmt` and `cargo clippy` before submitting
+# Check version (requires 1.85.0+)
+rustc --version
+```
+</details>
+
+<details>
+<summary><strong>Q: What to do when the program can't find osu! installation directory?</strong></summary>
+
+Manually specify the osu! installation path:
+```bash
+osynic-sl -p "C:\Users\YourName\AppData\Local\osu!" -t songs -o ./output
+```
+
+Or specify any directory containing the `Songs` folder.
+</details>
+
+### 🚀 Usage Related
+
+<details>
+<summary><strong>Q: What's the difference between FOLDER and OSUDB modes?</strong></summary>
+
+- **OSUDB Mode** (Recommended):
+  - ✅ Most accurate data with complete metadata
+  - ✅ Fast processing speed
+  - ❌ Requires osu!.db file to exist
+
+- **FOLDER Mode**:
+  - ✅ No dependency on database file
+  - ✅ Suitable for backup or corrupted installations
+  - ❌ May have inaccurate data due to irregular folder naming
+</details>
+
+<details>
+<summary><strong>Q: What does differential processing mean?</strong></summary>
+
+Differential processing finds differences between two beatmap collections:
+- Input: Local beatmaps + Remote beatmap list
+- Output: Only beatmaps missing locally
+- Purpose: Achieve incremental sync, avoid duplicate downloads
+</details>
+
+### 🐛 Troubleshooting
+
+<details>
+<summary><strong>Q: What to do when errors occur during serialization?</strong></summary>
+
+1. **Permission Issues**: Ensure read permissions for osu! directory
+2. **File Corruption**: Try using FOLDER mode to bypass corrupted .db files
+3. **Memory Shortage**: Close other programs to free up memory
+4. **Path Issues**: Use absolute paths instead of relative paths
+</details>
+
+<details>
+<summary><strong>Q: Output JSON file is empty or incomplete data?</strong></summary>
+
+Possible causes:
+- osu! database file corrupted or outdated
+- Songs folder empty or incorrect path
+- Insufficient permissions to read files
+
+Solutions:
+```bash
+# Try rebuilding database (press F5 in osu!)
+# Or use verbose output to see error information
+osynic-sl -t songs --verbose
+```
+</details>
+
+## 🤝 Contributing
+
+We welcome all forms of contributions! Whether it's code, documentation, bug reports, or feature suggestions.
+
+### 🔧 Development Environment Setup
+
+```bash
+# 1. Fork and clone repository
+git clone https://github.com/your-username/osynic_serializer
+cd osynic_serializer
+
+# 2. Install development dependencies
+cargo build
+
+# 3. Run tests
+cargo test
+
+# 4. Check code formatting
+cargo fmt --check
+cargo clippy -- -D warnings
+```
+
+### 📝 Submission Guidelines
+
+- **Code Style**: Follow official Rust coding standards
+- **Test Coverage**: New features require corresponding tests
+- **Documentation Updates**: API changes need synchronized documentation updates
+- **Commit Format**: Use clear commit messages
+
+### 🐛 Bug Reports
+
+When submitting bug reports, please include:
+- Operating system and version
+- Rust version
+- Complete error messages
+- Reproduction steps
+- Related configuration files
+
+### 💡 Feature Suggestions
+
+We especially welcome improvements in the following areas:
+- Performance optimization
+- New output format support
+- Better error handling
+- Cross-platform compatibility improvements
+
+## 🌟 Acknowledgments
+
+Special thanks to the following projects and contributors:
+
+- [osynic_osudb](https://github.com/osynicite/osynic_osudb) - Core osu!.db parsing library
+- [osynic_downloader](https://github.com/osynicite/osynic_downloader) - Companion beatmap downloading tool
+- osu! Community - Providing rich resources and support
+
+And all developers who contributed code, reported issues, and made suggestions for this project!
 
 ## 📜 License
 
-This project is open-sourced under the [MIT License](LICENSE), please respect the original author's copyright. When using osu! related resources, please abide by the [osu! Community Guidelines](https://osu.ppy.sh/wiki/zh/Legal).
+This project is open-sourced under the [MIT License](LICENSE).
+
+### Terms of Use
+
+- ✅ Commercial use
+- ✅ Modification and distribution
+- ✅ Private use
+- ❗ Must retain copyright notice
+- ❗ Must include license
+
+### Related Resources
+
+When using osu! related resources, please comply with:
+- [osu! Terms of Service](https://osu.ppy.sh/legal/terms)
+- [osu! Community Guidelines](https://osu.ppy.sh/wiki/en/Rules)
+
+---
+
+<div align="center">
+
+**⭐ If this project helps you, please give us a Star!**
+
+Made with ❤️ by [Osynicite](https://github.com/osynicite)
+
+</div>
