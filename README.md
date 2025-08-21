@@ -260,7 +260,7 @@ osynic_serializer = { version = "0.1.2", default-features = false, features = ["
 
 #### 主要命令函数
 
-```rust
+```rust,no_run
 use osynic_serializer::commands::{
     serialize_by_folder,    // 基于 Songs 文件夹序列化
     serialize_by_osu_db,    // 基于 osu!.db 文件序列化  
@@ -271,7 +271,7 @@ use osynic_serializer::commands::{
 
 #### 类型定义
 
-```rust
+```rust,no_run
 use osynic_serializer::types::{
     SongWithMapper,         // 单个谱面信息
     SongsWithMapper,        // 谱面集合
@@ -283,7 +283,7 @@ use osynic_serializer::types::{
 
 #### 基础序列化
 
-```rust
+```rust,no_run
 use osynic_serializer::commands::{serialize_by_folder, serialize_by_osu_db};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -301,7 +301,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 差量处理
 
-```rust
+```rust,no_run
 use osynic_serializer::commands::{diff_songs, diff_sets};
 use osynic_serializer::types::{SongsWithMapper, Beatmapsets};
 
@@ -323,7 +323,7 @@ fn sync_beatmaps() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 高级用法：自定义处理流程
 
-```rust
+```rust,no_run
 use osynic_serializer::functions::{
     check::{check_osu_dir, get_osu_dir},
     parse::parse_song_id_list_with_mapper,
@@ -358,7 +358,7 @@ fn custom_workflow() -> Result<(), Box<dyn std::error::Error>> {
 
 可以直接使用底层的 osu!.db 解析库：
 
-```rust
+```rust,no_run
 // 直接使用 osynic_osudb 的功能
 use osynic_serializer::osynic_osudb::*;
 ```

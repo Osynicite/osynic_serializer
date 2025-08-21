@@ -260,7 +260,7 @@ osynic_serializer = { version = "0.1.2", default-features = false, features = ["
 
 #### Main Command Functions
 
-```rust
+```rust,no_run
 use osynic_serializer::commands::{
     serialize_by_folder,    // Serialize based on Songs folder
     serialize_by_osu_db,    // Serialize based on osu!.db file  
@@ -271,7 +271,7 @@ use osynic_serializer::commands::{
 
 #### Type Definitions
 
-```rust
+```rust,no_run
 use osynic_serializer::types::{
     SongWithMapper,         // Individual beatmap information
     SongsWithMapper,        // Beatmap collection
@@ -283,7 +283,7 @@ use osynic_serializer::types::{
 
 #### Basic Serialization
 
-```rust
+```rust,no_run
 use osynic_serializer::commands::{serialize_by_folder, serialize_by_osu_db};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -301,7 +301,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### Differential Processing
 
-```rust
+```rust,no_run
 use osynic_serializer::commands::{diff_songs, diff_sets};
 use osynic_serializer::types::{SongsWithMapper, Beatmapsets};
 
@@ -323,7 +323,7 @@ fn sync_beatmaps() -> Result<(), Box<dyn std::error::Error>> {
 
 #### Advanced Usage: Custom Processing Workflow
 
-```rust
+```rust,no_run
 use osynic_serializer::functions::{
     check::{check_osu_dir, get_osu_dir},
     parse::parse_song_id_list_with_mapper,
@@ -358,7 +358,7 @@ fn custom_workflow() -> Result<(), Box<dyn std::error::Error>> {
 
 You can directly use the underlying osu!.db parsing library:
 
-```rust
+```rust,no_run
 // Directly use osynic_osudb functionality
 use osynic_serializer::osynic_osudb::*;
 ```
