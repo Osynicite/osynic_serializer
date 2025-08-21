@@ -1,9 +1,9 @@
 use super::parse::{parse_beatmap_to_song, parse_beatmap_to_song_with_mapper};
-use osynic_osudb::entity::osu::osudb::OsuDB;
 use super::storage::marked_save_to;
 use super::walker::{walk_file_name_with_extension_first, walk_folder_name};
 use crate::error::Result;
 use crate::types::{Song, SongWithMapper};
+use osynic_osudb::entity::osu::osudb::OsuDB;
 
 pub fn serialize_song_folder_raw(folder_name: &str) -> Result<(u32, String, String, bool)> {
     let parts: Vec<&str> = folder_name.splitn(2, ' ').collect();
