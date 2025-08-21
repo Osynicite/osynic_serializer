@@ -31,10 +31,7 @@ pub fn parse_beatmap_to_song_with_mapper(beatmap: &Beatmap) -> SongWithMapper {
 // 函数二、Vec<Beatmap> -> Vec<Song>
 
 pub fn parse_beatmap_list_to_song_list(beatmaps: &[Beatmap]) -> Vec<Song> {
-    beatmaps
-        .iter()
-        .map(parse_beatmap_to_song)
-        .collect()
+    beatmaps.iter().map(parse_beatmap_to_song).collect()
 }
 
 // 函数三、返回Song的song_id
