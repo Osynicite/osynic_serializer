@@ -30,10 +30,10 @@ pub fn parse_beatmap_to_song_with_mapper(beatmap: &Beatmap) -> SongWithMapper {
 
 // 函数二、Vec<Beatmap> -> Vec<Song>
 
-pub fn parse_beatmap_list_to_song_list(beatmaps: &Vec<Beatmap>) -> Vec<Song> {
+pub fn parse_beatmap_list_to_song_list(beatmaps: &[Beatmap]) -> Vec<Song> {
     beatmaps
         .iter()
-        .map(|beatmap| parse_beatmap_to_song(beatmap))
+        .map(parse_beatmap_to_song)
         .collect()
 }
 
@@ -43,12 +43,12 @@ pub fn parse_song_id(song: &Song) -> u32 {
 }
 
 // 函数四、传入Vec<Song>，返回song_id的Vec<u32>
-pub fn parse_song_id_list(songs: &Vec<Song>) -> Vec<u32> {
-    songs.iter().map(|song| parse_song_id(song)).collect()
+pub fn parse_song_id_list(songs: &[Song]) -> Vec<u32> {
+    songs.iter().map(parse_song_id).collect()
 }
 
 // 函数五，输入Vec<SongWithMapper>，返回song_id的Vec<u32>
-pub fn parse_song_id_list_with_mapper(songs: &Vec<SongWithMapper>) -> Vec<u32> {
+pub fn parse_song_id_list_with_mapper(songs: &[SongWithMapper]) -> Vec<u32> {
     songs.iter().map(|song| song.song_id).collect()
 }
 

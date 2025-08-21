@@ -21,7 +21,7 @@ pub fn add_timestamp_to_filename(filename: &str) -> String {
 // 函数二、给文件夹名尾缀添加当前时间戳
 pub fn add_timestamp_to_foldername(foldername: &str) -> String {
     let timestamp = chrono::Utc::now().format("%y%m%d%H%M%S");
-    format!("{}_{}", foldername, timestamp)
+    format!("{foldername}_{timestamp}")
 }
 
 // 函数三、给文件名尾缀添加当前操作系统和设备名
@@ -77,7 +77,7 @@ pub fn add_os_and_hostname_to_foldername(foldername: &str) -> String {
         )
     };
     let hostname = sys_info::hostname().unwrap_or_default();
-    format!("{}_{}_{}", foldername, os_info, hostname)
+    format!("{foldername}_{os_info}_{hostname}")
 }
 
 // 函数五、先给文件名尾缀添加当前时间戳，再给文件名尾缀添加当前操作系统和设备名
@@ -136,7 +136,7 @@ pub fn add_timestamp_and_os_and_hostname_to_foldername(foldername: &str) -> Stri
         )
     };
     let hostname = sys_info::hostname().unwrap_or_default();
-    format!("{}_{}_{}_{}", foldername, timestamp, os_info, hostname)
+    format!("{foldername}_{timestamp}_{os_info}_{hostname}")
 }
 
 // test module

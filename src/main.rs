@@ -14,8 +14,8 @@ use std::path::{Path, PathBuf};
 
 #[derive(Debug, Clone, clap::ValueEnum)]
 enum Algorithm {
-    OSUDB,
-    FOLDER,
+    Osudb,
+    Folder,
 }
 
 #[derive(Debug, Clone, clap::ValueEnum)]
@@ -50,8 +50,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     validate_diff_file(&args.diff, &args.json_type)?;
 
     let songs = match args.algorithm {
-        Algorithm::OSUDB => serialize_by_osu_db(osu_dir.to_str().unwrap_or_default()),
-        Algorithm::FOLDER => serialize_by_folder(osu_dir.to_str().unwrap_or_default()),
+        Algorithm::Osudb => serialize_by_osu_db(osu_dir.to_str().unwrap_or_default()),
+        Algorithm::Folder => serialize_by_folder(osu_dir.to_str().unwrap_or_default()),
     }?;
 
     let is_diff = args.diff.is_some();
@@ -146,8 +146,8 @@ fn save_sets_data(
             .unwrap_or_default()
             .get_name(),
         match algorithm {
-            Algorithm::OSUDB => "dm",
-            Algorithm::FOLDER => "m",
+            Algorithm::Osudb => "dm",
+            Algorithm::Folder => "m",
         }
     );
     let json = serde_json::to_string_pretty(data)?;
@@ -170,8 +170,8 @@ fn save_songs_data(
             .unwrap_or_default()
             .get_name(),
         match algorithm {
-            Algorithm::OSUDB => "dm",
-            Algorithm::FOLDER => "m",
+            Algorithm::Osudb => "dm",
+            Algorithm::Folder => "m",
         }
     );
     let json = serde_json::to_string_pretty(&data.songs)?;

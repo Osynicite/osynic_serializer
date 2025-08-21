@@ -79,11 +79,11 @@ pub enum ErrorKind {
 impl std::fmt::Debug for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            ErrorKind::OsynicSerializerError(e) => write!(f, "{:?}", e),
-            ErrorKind::OsynicOsudbError(e) => write!(f, "{:?}", e),
-            ErrorKind::PraseIntError(e) => write!(f, "{:?}", e),
-            ErrorKind::SerdeJsonError(e) => write!(f, "{:?}", e),
-            ErrorKind::StdIoError(e) => write!(f, "{:?}", e),
+            ErrorKind::OsynicSerializerError(e) => write!(f, "{e:?}"),
+            ErrorKind::OsynicOsudbError(e) => write!(f, "{e:?}"),
+            ErrorKind::PraseIntError(e) => write!(f, "{e:?}"),
+            ErrorKind::SerdeJsonError(e) => write!(f, "{e:?}"),
+            ErrorKind::StdIoError(e) => write!(f, "{e:?}"),
         }
     }
 }
@@ -91,11 +91,11 @@ impl std::fmt::Debug for ErrorKind {
 impl std::fmt::Display for ErrorKind {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            ErrorKind::OsynicSerializerError(e) => write!(f, "{}", e),
-            ErrorKind::OsynicOsudbError(e) => write!(f, "{}", e),
-            ErrorKind::PraseIntError(e) => write!(f, "{}", e),
-            ErrorKind::SerdeJsonError(e) => write!(f, "{}", e),
-            ErrorKind::StdIoError(e) => write!(f, "{}", e),
+            ErrorKind::OsynicSerializerError(e) => write!(f, "{e}"),
+            ErrorKind::OsynicOsudbError(e) => write!(f, "{e}"),
+            ErrorKind::PraseIntError(e) => write!(f, "{e}"),
+            ErrorKind::SerdeJsonError(e) => write!(f, "{e}"),
+            ErrorKind::StdIoError(e) => write!(f, "{e}"),
         }
     }
 }

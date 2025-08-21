@@ -8,23 +8,23 @@ use crate::types::{Beatmapsets, SongsWithMapper};
 
 pub fn serialize_by_folder(osu_dir: &str) -> Result<SongsWithMapper> {
     if check_songs_dir(osu_dir) {
-        let song_dir = format!("{}\\Songs", osu_dir);
+        let song_dir = format!("{osu_dir}\\Songs");
         let songs = serialize_song_folder_with_mapper(&song_dir)?;
         Ok(SongsWithMapper { songs })
     } else {
-        eprintln!("No songs found in the directory: {}", osu_dir);
+        eprintln!("No songs found in the directory: {osu_dir}");
         Err("No songs found".into())
     }
 }
 
 pub fn serialize_by_osu_db(osu_dir: &str) -> Result<SongsWithMapper> {
     if check_osu_db(osu_dir) {
-        let osudb_dir = format!("{}\\osu!.db", osu_dir);
+        let osudb_dir = format!("{osu_dir}\\osu!.db");
         let mut osu_db = open_osu_db(&osudb_dir)?;
         let songs = serialize_osu_db_with_mapper(&mut osu_db)?;
         Ok(SongsWithMapper { songs })
     } else {
-        eprintln!("No osu!db found in the directory : {}", osu_dir);
+        eprintln!("No osu!db found in the directory : {osu_dir}");
         Err("No osu!db found".into())
     }
 }

@@ -9,7 +9,7 @@ pub fn serialize_song_folder_raw(folder_name: &str) -> Result<(u32, String, Stri
     let parts: Vec<&str> = folder_name.splitn(2, ' ').collect();
     let song_id_str = parts[0];
 
-    if !song_id_str.chars().all(|c| c.is_digit(10)) {
+    if !song_id_str.chars().all(|c| c.is_ascii_digit()) {
         return Err("Invalid song_id".into());
     }
 
@@ -92,7 +92,7 @@ pub fn serialize_song_folder_with_mapper(songs_dir: &str) -> Result<Vec<SongWith
         if let Ok((song_id, artist_name, song_name, no_video)) =
             serialize_song_folder_raw(&folder_name)
         {
-            let sub_name = format!("{}/{}", songs_dir, folder_name);
+            let sub_name = format!("{songs_dir}/{folder_name}");
             let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?;
             let mapper_name = serialize_mapper_raw(&inner_name)?;
             songs.push(SongWithMapper {
@@ -140,7 +140,7 @@ pub fn serialize_by_folder_name_with_mapper(songs_dir: &str, save_path: &str) ->
         if let Ok((song_id, artist_name, song_name, no_video)) =
             serialize_song_folder_raw(&folder_name)
         {
-            let sub_name = format!("{}/{}", songs_dir, folder_name);
+            let sub_name = format!("{songs_dir}/{folder_name}");
             let inner_name = walk_file_name_with_extension_first(&sub_name, ".osu")?;
             let mapper_name = serialize_mapper_raw(&inner_name)?;
             songs.push(SongWithMapper {

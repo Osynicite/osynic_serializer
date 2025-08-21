@@ -2,7 +2,7 @@ use crate::types::{Song, SongWithMapper};
 
 // 函数一 比较新旧两个的Vec<Song>的差异，输出新的Vec<Song>里面多出来的部分，按照song_id来比较，尽可能减少内存占用
 
-pub fn diff_new_songs_by_song_id(songs_old: &Vec<Song>, songs_new: &Vec<Song>) -> Vec<Song> {
+pub fn diff_new_songs_by_song_id(songs_old: &[Song], songs_new: &[Song]) -> Vec<Song> {
     let song_id_list_old: Vec<u32> = songs_old.iter().map(|song| song.song_id).collect();
     let mut diff_songs: Vec<Song> = Vec::new();
     for song in songs_new {
@@ -14,8 +14,8 @@ pub fn diff_new_songs_by_song_id(songs_old: &Vec<Song>, songs_new: &Vec<Song>) -
 }
 
 pub fn diff_new_songs_by_song_id_with_mapper(
-    songs_old: &Vec<SongWithMapper>,
-    songs_new: &Vec<SongWithMapper>,
+    songs_old: &[SongWithMapper],
+    songs_new: &[SongWithMapper],
 ) -> Vec<SongWithMapper> {
     let song_id_list_old: Vec<u32> = songs_old.iter().map(|song| song.song_id).collect();
     let mut diff_songs: Vec<SongWithMapper> = Vec::new();
@@ -28,10 +28,10 @@ pub fn diff_new_songs_by_song_id_with_mapper(
 }
 
 // 函数三 比较新旧两个的Vec<u32>的差异，输出新的Vec<u32>里面多出来的部分，尽可能减少内存占用
-pub fn diff_new_sets_by_sets(sets_old: &Vec<u32>, sets_new: &Vec<u32>) -> Vec<u32> {
+pub fn diff_new_sets_by_sets(sets_old: &[u32], sets_new: &[u32]) -> Vec<u32> {
     let mut diff_sets: Vec<u32> = Vec::new();
     for sets_item in sets_new {
-        if !sets_old.contains(&sets_item) {
+        if !sets_old.contains(sets_item) {
             diff_sets.push(*sets_item);
         }
     }
